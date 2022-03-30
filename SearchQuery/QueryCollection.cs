@@ -6,9 +6,9 @@
         { }
     }
 
-    public class SearchCollection : QueryCollection<object>
+    public class QueryCollection : QueryCollection<object>
     {
-        public SearchCollection()
+        public QueryCollection()
         { }
     }
 }

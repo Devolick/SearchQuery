@@ -55,8 +55,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.StartsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.StartsWith,
+                        Values = new QueryCollection
                         {
                             "Alex"
                         }
@@ -81,8 +81,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotStartsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotStartsWith,
+                        Values = new QueryCollection
                         {
                             "Alex"
                         }
@@ -106,8 +106,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.EndsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.EndsWith,
+                        Values = new QueryCollection
                         {
                             "Dym"
                         }
@@ -131,8 +131,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEndsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEndsWith,
+                        Values = new QueryCollection
                         {
                             "Dym"
                         }
@@ -156,8 +156,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Contains,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Contains,
+                        Values = new QueryCollection
                         {
                             "y"
                         }
@@ -181,8 +181,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotContains,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotContains,
+                        Values = new QueryCollection
                         {
                             "y"
                         }
@@ -206,8 +206,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Equal,
+                        Values = new QueryCollection
                         {
                             "Nadia Krav"
                         }
@@ -231,8 +231,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEqual,
+                        Values = new QueryCollection
                         {
                             "Nadia Krav"
                         }
@@ -256,8 +256,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.Equal,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -278,8 +278,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.NotEqual,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -300,8 +300,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThan,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.LessThan,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -322,8 +322,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThanOrEqual,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.LessThanOrEqual,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -344,8 +344,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThan,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.GreaterThan,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -366,8 +366,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThanOrEqual,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.GreaterThanOrEqual,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -391,9 +391,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.StartsWith,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.StartsWith,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "AlEx"
                         }
@@ -418,9 +418,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotStartsWith,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotStartsWith,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "Alex"
                         }
@@ -444,9 +444,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.EndsWith,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.EndsWith,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "DYm"
                         }
@@ -470,9 +470,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEndsWith,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEndsWith,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "DYm"
                         }
@@ -496,9 +496,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Contains,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Contains,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "Y"
                         }
@@ -522,9 +522,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotContains,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotContains,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "Y"
                         }
@@ -548,9 +548,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Equal,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "Nadia KRAV"
                         }
@@ -574,9 +574,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEqual,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection
                         {
                             "Nadia KRAV"
                         }
@@ -600,9 +600,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.Equal,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -623,9 +623,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.NotEqual,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -646,9 +646,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThan,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.LessThan,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -669,9 +669,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThanOrEqual,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.LessThanOrEqual,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -692,9 +692,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThan,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.GreaterThan,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -715,9 +715,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThanOrEqual,
-                        Case = SearchCase.Lower,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.GreaterThanOrEqual,
+                        Case = QueryCase.Lower,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -740,9 +740,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.StartsWith,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.StartsWith,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "AlEx"
                         }
@@ -767,9 +767,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotStartsWith,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotStartsWith,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "Alex"
                         }
@@ -793,9 +793,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.EndsWith,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.EndsWith,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "DYm"
                         }
@@ -819,9 +819,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEndsWith,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEndsWith,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "DYm"
                         }
@@ -845,9 +845,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Contains,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Contains,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "Y"
                         }
@@ -871,9 +871,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotContains,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotContains,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "Y"
                         }
@@ -897,9 +897,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Equal,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "Nadia KRAV"
                         }
@@ -923,9 +923,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEqual,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection
                         {
                             "Nadia KRAV"
                         }
@@ -949,9 +949,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.Equal,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.Equal,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -972,9 +972,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.NotEqual,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.NotEqual,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -995,9 +995,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThan,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.LessThan,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -1018,9 +1018,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.LessThanOrEqual,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.LessThanOrEqual,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -1041,9 +1041,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThan,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.GreaterThan,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };
@@ -1064,9 +1064,9 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.GreaterThanOrEqual,
-                        Case = SearchCase.Upper,
-                        Values = new SearchCollection { "Dzmitry DYM" }
+                        Operation = QueryOperation.GreaterThanOrEqual,
+                        Case = QueryCase.Upper,
+                        Values = new QueryCollection { "Dzmitry DYM" }
                     }
                 }
             };

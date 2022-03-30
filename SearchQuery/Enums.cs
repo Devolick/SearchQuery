@@ -1,6 +1,6 @@
 ﻿namespace SearchQuery
 {
-    public enum SearchOperation
+    public enum QueryOperation
     {
         // Operations
         Equal = 0,
@@ -18,10 +18,12 @@
 
         // Between
         Between = 12,
-        NotBetween = 13
+        NotBetween = 13,
+
+        Sub = 14,
     }
 
-    public enum SearchCase
+    public enum QueryCase
     {
         Default = 0,
         Lower = 1,

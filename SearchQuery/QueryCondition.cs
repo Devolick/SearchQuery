@@ -3,15 +3,18 @@
     public class QueryCondition
     {
         public string Field { get; set; }
-        public SearchOperation Operation { get; set; }
-        public SearchCollection Values { get; set; }
-        public SearchCase Case { get; set; }
+        public QueryOperation Operation { get; set; }
+        public QueryCollection Values { get; set; }
+        public QueryCase Case { get; set; }
+        public bool OrElse { get; set; }
+        public ConditionCollection Conditions { get; set; }
 
         public QueryCondition()
         {
-            Operation = SearchOperation.Equal;
-            Values = new SearchCollection();
-            Case = SearchCase.Default;
+            Operation = QueryOperation.Equal;
+            Values = new QueryCollection();
+            Case = QueryCase.Default;
+            Conditions = new ConditionCollection();
         }
     }
 }

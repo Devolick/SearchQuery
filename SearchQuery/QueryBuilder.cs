@@ -38,32 +38,38 @@ namespace SearchQuery
             var values = conditions
                 .Select(condition =>
                 {
-                    var property = Mapper.Property(left, condition.Field);
-                    var values = Values<T>(condition.Field, condition.Values, out Type valueType)
-                        .Select(value =>
-                        {
-                            if (IsNumber(valueType))
+                    if (condition.Operation == QueryOperation.Sub)
+                    {
+                        return null;
+                    } else
+                    {
+                        var property = Mapper.Property(left, condition.Field);
+                        var values = Values<T>(condition.Field, condition.Values, out Type valueType)
+                            .Select(value =>
                             {
-                                return Number(property, value, valueType, condition.Operation);
-                            }
-                            else if (IsDateTime(valueType))
-                            {
-                                return DateTime(property, value, valueType, condition.Operation);
-                            }
-                            else if (IsBoolean(valueType))
-                            {
-                                return Boolean(property, value, valueType, condition.Operation);
-                            }
+                                if (IsNumber(valueType))
+                                {
+                                    return Number(property, value, valueType, condition.Operation);
+                                }
+                                else if (IsDateTime(valueType))
+                                {
+                                    return DateTime(property, value, valueType, condition.Operation);
+                                }
+                                else if (IsBoolean(valueType))
+                                {
+                                    return Boolean(property, value, valueType, condition.Operation);
+                                }
 
-                            return String(property, value, valueType, condition.Operation, condition.Case);
-                        });
-                    if (orElse)
-                    {
-                        return Mapper.OrAggregate(values);
-                    }
-                    else
-                    {
-                        return Mapper.AndAggregate(values);
+                                return String(property, value, valueType, condition.Operation, condition.Case);
+                            });
+                        if (orElse)
+                        {
+                            return Mapper.OrAggregate(values);
+                        }
+                        else
+                        {
+                            return Mapper.AndAggregate(values);
+                        } 
                     }
                 });
 
@@ -102,25 +108,25 @@ namespace SearchQuery
 
         }
         private Mapper Boolean(Mapper left, Mapper right, Type valueType,
-            SearchOperation operation)
+            QueryOperation operation)
         {
             switch (operation)
             {
-                case SearchOperation.NotEqual:
-                case SearchOperation.NotBetween:
-                case SearchOperation.NotContains:
-                case SearchOperation.NotStartsWith:
-                case SearchOperation.NotEndsWith:           
+                case QueryOperation.NotEqual:
+                case QueryOperation.NotBetween:
+                case QueryOperation.NotContains:
+                case QueryOperation.NotStartsWith:
+                case QueryOperation.NotEndsWith:           
                     return left.NotEqual(right);
-                case SearchOperation.Equal:
-                case SearchOperation.LessThan:
-                case SearchOperation.LessThanOrEqual:
-                case SearchOperation.GreaterThan:
-                case SearchOperation.GreaterThanOrEqual:
-                case SearchOperation.Between:
-                case SearchOperation.Contains:
-                case SearchOperation.StartsWith:
-                case SearchOperation.EndsWith:
+                case QueryOperation.Equal:
+                case QueryOperation.LessThan:
+                case QueryOperation.LessThanOrEqual:
+                case QueryOperation.GreaterThan:
+                case QueryOperation.GreaterThanOrEqual:
+                case QueryOperation.Between:
+                case QueryOperation.Contains:
+                case QueryOperation.StartsWith:
+                case QueryOperation.EndsWith:
                     return left.Equal(right);
 
                 default: throw new ArgumentException("Uknown boolean operation");
@@ -159,37 +165,37 @@ namespace SearchQuery
             return false;
         }
         private Mapper Number(Mapper left, Mapper right, Type valueType,
-            SearchOperation operation)
+            QueryOperation operation)
         {
             switch (operation)
             {
-                case SearchOperation.LessThan:
+                case QueryOperation.LessThan:
                     return left.LessThan(right);
-                case SearchOperation.LessThanOrEqual:
+                case QueryOperation.LessThanOrEqual:
                     return left.LessThanOrEqual(right);
-                case SearchOperation.GreaterThan:
+                case QueryOperation.GreaterThan:
                     return left.GreaterThan(right);
-                case SearchOperation.GreaterThanOrEqual:
+                case QueryOperation.GreaterThanOrEqual:
                     return left.GreaterThanOrEqual(right);
-                case SearchOperation.Between:
+                case QueryOperation.Between:
                     return left.Between(right);
-                case SearchOperation.NotBetween:
+                case QueryOperation.NotBetween:
                     return left.NotBetween(right);
-                case SearchOperation.Contains:
+                case QueryOperation.Contains:
                     return left.AsString().Contains(right.AsString());
-                case SearchOperation.NotContains:
+                case QueryOperation.NotContains:
                     return left.AsString().NotContains(right.AsString());
-                case SearchOperation.StartsWith:
+                case QueryOperation.StartsWith:
                     return left.AsString().StartsWith(right.AsString());
-                case SearchOperation.NotStartsWith:
+                case QueryOperation.NotStartsWith:
                     return left.AsString().NotStartsWith(right.AsString());
-                case SearchOperation.EndsWith:
+                case QueryOperation.EndsWith:
                     return left.AsString().EndsWith(right.AsString());
-                case SearchOperation.NotEndsWith:
+                case QueryOperation.NotEndsWith:
                     return left.AsString().NotEndsWith(right.AsString());
-                case SearchOperation.NotEqual:
+                case QueryOperation.NotEqual:
                     return left.NotEqual(right);
-                case SearchOperation.Equal:
+                case QueryOperation.Equal:
                     return left.Equal(right);
 
                 default: throw new ArgumentException("Uknown number operation");
@@ -216,37 +222,37 @@ namespace SearchQuery
             return false;
         }
         private Mapper DateTime(Mapper left, Mapper right, Type valueType,
-            SearchOperation operation)
+            QueryOperation operation)
         {
             switch (operation)
             {
-                case SearchOperation.LessThan:
+                case QueryOperation.LessThan:
                     return left.LessThan(right);
-                case SearchOperation.LessThanOrEqual:
+                case QueryOperation.LessThanOrEqual:
                     return left.LessThanOrEqual(right);
-                case SearchOperation.GreaterThan:
+                case QueryOperation.GreaterThan:
                     return left.GreaterThan(right);
-                case SearchOperation.GreaterThanOrEqual:
+                case QueryOperation.GreaterThanOrEqual:
                     return left.GreaterThanOrEqual(right);
-                case SearchOperation.Between:
+                case QueryOperation.Between:
                     return left.Between(right);
-                case SearchOperation.NotBetween:
+                case QueryOperation.NotBetween:
                     return left.NotBetween(right);
-                case SearchOperation.Contains:
+                case QueryOperation.Contains:
                     return left.AsString().Contains(right.AsString());
-                case SearchOperation.NotContains:
+                case QueryOperation.NotContains:
                     return left.AsString().NotContains(right.AsString());
-                case SearchOperation.StartsWith:
+                case QueryOperation.StartsWith:
                     return left.AsString().StartsWith(right.AsString());
-                case SearchOperation.NotStartsWith:
+                case QueryOperation.NotStartsWith:
                     return left.AsString().NotStartsWith(right.AsString());
-                case SearchOperation.EndsWith:
+                case QueryOperation.EndsWith:
                     return left.AsString().EndsWith(right.AsString());
-                case SearchOperation.NotEndsWith:
+                case QueryOperation.NotEndsWith:
                     return left.AsString().NotEndsWith(right.AsString());
-                case SearchOperation.NotEqual:
+                case QueryOperation.NotEqual:
                     return left.NotEqual(right);
-                case SearchOperation.Equal:
+                case QueryOperation.Equal:
                     return left.Equal(right);
 
                 default: throw new ArgumentException("Uknown datetime operation");
@@ -273,7 +279,7 @@ namespace SearchQuery
             return false;
         }
         private Mapper String(Mapper left, Mapper right, Type valueType,
-            SearchOperation operation, SearchCase searchCase)
+            QueryOperation operation, QueryCase searchCase)
         {
             var _default = Mapper.Constant(string.Empty, valueType);  
             
@@ -286,15 +292,15 @@ namespace SearchQuery
 
             switch (operation)
             {
-                case SearchOperation.LessThan:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.LessThan:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .LessThan(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -304,15 +310,15 @@ namespace SearchQuery
                     return Mapper.CompareTo(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default))
                                 .LessThan(Mapper.Constant(0, typeof(int)));
-                case SearchOperation.LessThanOrEqual:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.LessThanOrEqual:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .LessThanOrEqual(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -322,15 +328,15 @@ namespace SearchQuery
                     return Mapper.CompareTo(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default))
                                 .LessThanOrEqual(Mapper.Constant(0, typeof(int)));
-                case SearchOperation.GreaterThan:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.GreaterThan:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default), 
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .GreaterThan(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -340,15 +346,15 @@ namespace SearchQuery
                     return Mapper.CompareTo(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default))
                                 .GreaterThan(Mapper.Constant(0, typeof(int)));
-                case SearchOperation.GreaterThanOrEqual:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.GreaterThanOrEqual:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .GreaterThanOrEqual(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -358,15 +364,15 @@ namespace SearchQuery
                     return Mapper.CompareTo(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default))
                                 .GreaterThanOrEqual(Mapper.Constant(0, typeof(int)));
-                case SearchOperation.Between:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.Between:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .Between(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -375,15 +381,15 @@ namespace SearchQuery
                     }
                     return Mapper.Between(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
-                case SearchOperation.NotBetween:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.NotBetween:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default))
                                 .NotBetween(Mapper.Constant(0, typeof(int)));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.CompareTo(
                             Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
@@ -392,104 +398,104 @@ namespace SearchQuery
                     }
                     return Mapper.NotBetween(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
-                case SearchOperation.Contains:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.Contains:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.Contains(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.Contains(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.Contains(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.NotContains:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.NotContains:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.NotContains(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.NotContains(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.NotContains(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.StartsWith:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.StartsWith:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.StartsWith(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.StartsWith(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.StartsWith(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.NotStartsWith:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.NotStartsWith:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.NotStartsWith(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.NotStartsWith(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.NotStartsWith(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.EndsWith:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.EndsWith:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.EndsWith(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.EndsWith(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.EndsWith(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.NotEndsWith:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.NotEndsWith:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.NotEndsWith(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.NotEndsWith(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.NotEndsWith(Mapper.WhenNull(left, left, _default),
                         Mapper.WhenNull(right, right, _default));
-                case SearchOperation.Equal:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.Equal:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.Equal(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.Equal(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
                     }
                     return Mapper.Equal(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));
-                case SearchOperation.NotEqual:
-                    if (searchCase == SearchCase.Lower)
+                case QueryOperation.NotEqual:
+                    if (searchCase == QueryCase.Lower)
                     {
                         return Mapper.NotEqual(Mapper.WhenNull(left, Mapper.ToLower(left), _default),
                             Mapper.WhenNull(right, Mapper.ToLower(right), _default));
                     }
-                    else if (searchCase == SearchCase.Upper)
+                    else if (searchCase == QueryCase.Upper)
                     {
                         return Mapper.NotEqual(Mapper.WhenNull(left, Mapper.ToUpper(left), _default),
                             Mapper.WhenNull(right, Mapper.ToUpper(right), _default));

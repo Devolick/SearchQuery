@@ -60,8 +60,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.StartsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.StartsWith,
+                        Values = new QueryCollection
                         {
                             10.333m
                         }
@@ -85,8 +85,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.NotStartsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotStartsWith,
+                        Values = new QueryCollection
                         {
                             10.333m
                         }
@@ -110,8 +110,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.EndsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.EndsWith,
+                        Values = new QueryCollection
                         {
                             "Dym"
                         }
@@ -135,8 +135,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.NotEndsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEndsWith,
+                        Values = new QueryCollection
                         {
                             "Dym"
                         }
@@ -160,8 +160,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.Contains,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Contains,
+                        Values = new QueryCollection
                         {
                             "y"
                         }
@@ -185,8 +185,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.NotContains,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotContains,
+                        Values = new QueryCollection
                         {
                             "y"
                         }
@@ -210,8 +210,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.Equal,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.Equal,
+                        Values = new QueryCollection
                         {
                             "Nadia Krav"
                         }
@@ -235,8 +235,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.NotEqual,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.NotEqual,
+                        Values = new QueryCollection
                         {
                             "Nadia Krav"
                         }
@@ -260,8 +260,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.Equal,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.Equal,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -282,8 +282,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.NotEqual,
-                        Values = new SearchCollection { null }
+                        Operation = QueryOperation.NotEqual,
+                        Values = new QueryCollection { null }
                     }
                 }
             };
@@ -304,8 +304,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.LessThan,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.LessThan,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -326,8 +326,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.LessThanOrEqual,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.LessThanOrEqual,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -348,8 +348,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.GreaterThan,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.GreaterThan,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };
@@ -370,8 +370,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.Payment),
-                        Operation = SearchOperation.GreaterThanOrEqual,
-                        Values = new SearchCollection { "Dzmitry Dym" }
+                        Operation = QueryOperation.GreaterThanOrEqual,
+                        Values = new QueryCollection { "Dzmitry Dym" }
                     }
                 }
             };

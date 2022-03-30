@@ -60,8 +60,8 @@ namespace SearchQuery.Tests
                     new QueryCondition
                     {
                         Field = nameof(TestObject.UserName),
-                        Operation = SearchOperation.StartsWith,
-                        Values = new SearchCollection
+                        Operation = QueryOperation.StartsWith,
+                        Values = new QueryCollection
                         {
                             "Alex"
                         }
