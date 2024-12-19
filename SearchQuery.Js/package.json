@@ -1,5 +1,5 @@
 {
-  "name": "searchquery",
+  "name": "jsearchquery",
   "version": "1.0.0",
   "description": "SearchQuery is a library that extends LINQ search over a database using Entity Framework.",
   "main": "dist/lib.cjs.js",
