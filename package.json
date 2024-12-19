@@ -1,0 +1,21 @@
+{
+  "name": "searchquery",
+  "version": "1.0.0",
+  "description": "SearchQuery is a library that extends LINQ search over a database using Entity Framework. SearchQuery isn't tied to any specific database or storage engine and is instead backed by your existing code and data. Search can be done in two interfaces IQueryable, IEnumerable.",
+  "private": "true",
+  "scripts": {
+    "pnet": "npm run --prefix ./searchquery && dotnet pack --configuration Release",
+    "pjs": "npm run --prefix ./searchquery.js build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devolick/SearchQuery.git"
+  },
+  "keywords": [],
+  "author": "Dzmitry Dym",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Devolick/SearchQuery/issues"
+  },
+  "homepage": "https://github.com/Devolick/SearchQuery#readme"
+}

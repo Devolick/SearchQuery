@@ -1,0 +1,42 @@
+{
+  "name": "searchquery",
+  "version": "1.0.0",
+  "description": "SearchQuery is a library that extends LINQ search over a database using Entity Framework.",
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.es.js",
+  "types": "dist/lib.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devolick/SearchQuery.git"
+  },
+  "keywords": [
+    "search",
+    "query",
+    "data",
+    "database",
+    "collection",
+    "Entity Framework",
+    "LINQ"
+  ],
+  "author": "Dzmitry Dym",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Devolick/SearchQuery/issues"
+  },
+  "homepage": "https://github.com/Devolick/SearchQuery#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "eslint": "^9.17.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

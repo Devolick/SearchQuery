@@ -1,0 +1,55 @@
+# Visual Studio
+.vs/
+*.sln
+*.suo
+*.user
+*.userprefs
+*.cache
+*.ide
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.idb
+*.app
+
+# Rider
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.nuspec
+packages/
+
+# Visual Studio Code
+.vscode/
+
+# Other
+*.db
+*.bak
+*.swp
+*.tmp
+*.log
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.gz
+*.tgz
+
+# Operating System
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
