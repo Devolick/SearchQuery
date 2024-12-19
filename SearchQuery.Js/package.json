@@ -1,6 +1,6 @@
 {
   "name": "jsearchquery",
-  "version": "1.0.0",
+  "version": "1.0.0-1",
   "description": "SearchQuery is a library that extends LINQ search over a database using Entity Framework.",
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.es.js",
@@ -16,6 +16,10 @@
     "type": "git",
     "url": "git+https://github.com/Devolick/SearchQuery.git"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "keywords": [
     "search",
     "query",
