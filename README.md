@@ -22,7 +22,7 @@ A SearchQuery object type at some point those fields have to resolve to some con
 | SearchQuery JS/TS | SearchQuery .NET | .NET                                                                             |
 | ----------------- | ---------------- | -------------------------------------------------------------------------------- |
 | string            | string           | string                                                                           |
-| Date              | string           | DateTime, DateOnly, TimeOnly                                                     |
+| Date              | string           | DateTime                                                                         |
 | number            | number           | char, byte, sbyte, short, ushort, int, uint, long, ulong, float, double, decimal |
 | boolean           | boolean          | boolean                                                                          |
 | null/undefined    | null             | null                                                                             |
@@ -53,13 +53,13 @@ const search = new SearchQuery({
           field: "fullName",
           operation: Operation.StartsWith,
           values: ["Dennis"],
-          case: Case.Lower,
+          incase: Case.Lower,
         },
         {
           field: "fullName",
           operation: Operation.EndsWith,
           values: ["Ritchie"],
-          case: Case.Upper,
+          incase: Case.Upper,
         },
       ],
     },
@@ -104,7 +104,7 @@ var searchQuery = new Search
                     {
                         "Dennis"
                     },
-                    Case = Case.Lower
+                    Incase = Case.Lower
                 },
                 new Condition
                 {
@@ -114,7 +114,7 @@ var searchQuery = new Search
                     {
                         "Ritchie"
                     },
-                    Case = Case.Upper
+                    Incase = Case.Upper
                 }
             }
         }
@@ -127,17 +127,274 @@ using (var db = new Database()) {
 
 # API
 
-**Search Class**
+## Namespace: `SearchQuery`
 
-_Inheritance_ Query Class
+### Class: `Extensions`
 
-_Methods_
+#### Search Methods
+
+**Search for IEnumerable**
 
 ```csharp
-public string ToJson();
-
-public static Search FromJson(string json);
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, Search query) where T : class;
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, Search query, int pageNumber, int pageSize) where T : class;
 ```
+
+- **Description**: Filters an `IEnumerable` collection based on the provided `Search` query object.
+- **Parameters**:
+  - `set`: The collection to search.
+  - `query`: The search query.
+  - `pageNumber`: (Optional) The page number for paginated results.
+  - `pageSize`: (Optional) The size of each page.
+- **Returns**: Filtered `IEnumerable`.
+
+**Search for IQueryable**
+
+```csharp
+public static IQueryable<T> Search<T>(this IQueryable<T> set, Search query) where T : class;
+public static IQueryable<T> Search<T>(this IQueryable<T> set, Search query, int pageNumber, int pageSize) where T : class;
+```
+
+- **Description**: Filters an `IQueryable` collection based on the provided `Search` query object.
+- **Parameters**: Same as above.
+- **Returns**: Filtered `IQueryable`.
+
+#### Type Analysis Methods
+
+**`InType`**
+
+```csharp
+public static Type? InType(this Type? valueType, bool isColletion = false);
+```
+
+- **Description**: Extracts the underlying type, especially for nullable or generic collection types.
+
+**`IsNull`**
+
+```csharp
+public static bool IsNull(this Type? valueType);
+```
+
+- **Description**: Determines if the given type is null.
+
+**`InNull`**
+
+```csharp
+public static Type? InNull(this Type? valueType);
+```
+
+- **Description**: Converts a type to a nullable type if applicable.
+
+**`IsType`**
+
+```csharp
+public static Types IsType(this Type type, bool isColletion = false);
+```
+
+- **Description**: Maps the type to a specific `Types` enum value (e.g., `String`, `Number`, `Boolean`, `Date`, `Null`).
+
+**`IsCollection`**
+
+```csharp
+public static bool IsColletion(this Type type);
+```
+
+- **Description**: Determines if the type represents a collection.
+
+**Type Checking Methods**
+
+```csharp
+public static bool IsBoolean(this Type? valueType, bool isColletion = false);
+public static bool IsNumber(this Type? valueType, bool isColletion = false);
+public static bool IsDate(this Type? valueType, bool isColletion = false);
+public static bool IsString(this Type? valueType, bool isColletion = false);
+```
+
+- **Description**: Determines if the type represents a specific data type or a collection.
+
+---
+
+## Namespace: `SearchQuery.NewtonsoftJson`
+
+### Class: `Extensions`
+
+#### JSON Search Methods
+
+**Convert JSON to Search Query**
+
+```csharp
+public static JSearch ToSearch(this string json);
+```
+
+- **Description**: Converts a JSON string to a `JSearch` object.
+
+**Search for IEnumerable**
+
+```csharp
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query) where T : class;
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query, int pageNumber, int pageSize) where T : class;
+```
+
+- **Description**: Filters an `IEnumerable` collection using a JSON query string.
+
+**Search for IQueryable**
+
+```csharp
+public static IQueryable<T> Search<T>(this IQueryable<T> set, string query) where T : class;
+public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int pageNumber, int pageSize) where T : class;
+```
+
+- **Description**: Filters an `IQueryable` collection using a JSON query string.
+
+---
+
+### Class: `JSearch`
+
+#### Attributes
+
+- **JsonConverter**
+  ```csharp
+  [Newtonsoft.Json.JsonConverter(typeof(SearchConverter))]
+  ```
+  - **Description**: Indicates that the `JSearch` class uses a custom JSON converter for serialization and deserialization.
+
+#### Methods
+
+**`ToJson`**
+
+   ```csharp
+   public string ToJson();
+   ```
+
+   - **Description**: Serializes the `JSearch` object into a JSON string using Newtonsoft.Json.
+
+**`FromJson`**
+   ```csharp
+   public static JSearch FromJson(string json);
+   ```
+   - **Description**: Deserializes a JSON string into a `JSearch` object.
+
+#### Constructor
+
+- **`JSearch()`**
+  ```csharp
+  public JSearch() : base()
+  ```
+  - **Description**: Initializes a new instance of the `JSearch` class.
+
+---
+
+## Namespace: `SearchQuery.SystemTextJson`
+
+### Class: `Extensions`
+
+#### JSON Search Methods
+
+**Convert JSON to Search Query**
+
+```csharp
+public static JSearch ToSearch(this string json);
+```
+
+- **Description**: Converts a JSON string to a `JSearch` object.
+
+**Search for IEnumerable**
+
+```csharp
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query) where T : class;
+public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query, int pageNumber, int pageSize) where T : class;
+```
+
+- **Description**: Filters an `IEnumerable` collection using a JSON query string.
+
+**Search for IQueryable**
+
+```csharp
+public static IQueryable<T> Search<T>(this IQueryable<T> set, string query) where T : class;
+public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int pageNumber, int pageSize) where T : class;
+```
+
+- **Description**: Filters an `IQueryable` collection using a JSON query string.
+
+---
+
+## Enums and Supporting Classes
+
+**Enum: `Types`**
+
+```csharp
+public enum Types
+{
+    String,
+    Number,
+    Boolean,
+    Date,
+    Null
+}
+```
+
+**Class: `JSearch`**
+
+- **Description**: Represents a JSON-based search query object.
+- **Methods**:
+  - `public static JSearch FromJson(string json);`
+
+## Namespace: `SearchQuery`
+
+### Class: `Search`
+
+#### Properties
+
+- **`Format`**
+  ```csharp
+  public Format Format { get; set; }
+  ```
+  - **Description**: Specifies the format for interpreting date-time values in search queries.
+  - **Default Value**: `Format.ISODateTime`
+
+#### Constructor
+
+- **`Search()`**
+  ```csharp
+  public Search() : base()
+  ```
+  - **Description**: Initializes a new instance of the `Search` class with default settings.
+
+---
+
+### Class: `JSearch`
+
+#### Attributes
+
+- **JsonConverter**
+  ```csharp
+  [System.Text.Json.Serialization.JsonConverter(typeof(SearchConverter))]
+  ```
+  - **Description**: Indicates that the `JSearch` class uses a custom JSON converter for serialization and deserialization.
+
+#### Methods
+
+1. **`ToJson`**
+
+   ```csharp
+   public string ToJson();
+   ```
+
+   - **Description**: Serializes the `JSearch` object into a JSON string using System.Text.Json.
+
+2. **`FromJson`**
+   ```csharp
+   public static JSearch FromJson(string json);
+   ```
+   - **Description**: Deserializes a JSON string into a `JSearch` object.
+
+#### Constructor
+
+- **`JSearch()`**
+  ```csharp
+  public JSearch() : base()
+  ```
+  - **Description**: Initializes a new instance of the `JSearch` class.
 
 **Query Class**
 
@@ -158,7 +415,7 @@ _Inheritance_ ISearch Interface
 | Field     | string    | ""              | Entity property name                                                                                   |
 | Operation | Operation | Operation.Equal | Action operation                                                                                       |
 | Values    | Values    | new Values()    | Inherit from List with object generic type                                                             |
-| Case      | Case      | Case.Default    | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
+| Incase    | Case      | Case.Default    | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
 | Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
 
 **Conditions Class**
