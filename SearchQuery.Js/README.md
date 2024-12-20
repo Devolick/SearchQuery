@@ -78,7 +78,7 @@ var searchQuery = new Search
         {
             Field = nameof(TestEntity.FullName),
             Operation = Operation.Equal,
-            Values = new Collection
+            Values = new Values
             {
                 "Dennis Ritchie"
             }
@@ -88,7 +88,7 @@ var searchQuery = new Search
             Field = nameof(TestEntity.Created),
             // Only two values for Between, NotBetween
             Operation = Operation.Between,
-            Values = new Collection
+            Values = new Values
             {
                 "1990-12-31", "2025-12-31"
             }
@@ -100,7 +100,7 @@ var searchQuery = new Search
                 {
                     Field = nameof(TestEntity.FullName),
                     Operation = Operation.StartsWith,
-                    Values = new Collection
+                    Values = new Values
                     {
                         "Dennis"
                     },
@@ -110,7 +110,7 @@ var searchQuery = new Search
                 {
                     Field = nameof(TestEntity.FullName),
                     Operation = Operation.EndsWith,
-                    Values = new Collection
+                    Values = new Values
                     {
                         "Ritchie"
                     },
@@ -153,13 +153,13 @@ _Inheritance_ ISearch Interface
 
 _Inheritance_ ISearch Interface
 
-| Property  | Type       | Default          | Description                                                                                            |
-| --------- | ---------- | ---------------- | ------------------------------------------------------------------------------------------------------ |
-| Field     | string     | ""               | Entity property name                                                                                   |
-| Operation | Operation  | Operation.Equal  | Action operation                                                                                       |
-| Values    | Collection | new Collection() | Inherit from List with object generic type                                                             |
-| Case      | Case       | Case.Default     | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
-| Format    | Format     | ISODateTime      | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
+| Property  | Type      | Default         | Description                                                                                            |
+| --------- | --------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| Field     | string    | ""              | Entity property name                                                                                   |
+| Operation | Operation | Operation.Equal | Action operation                                                                                       |
+| Values    | Values    | new Values()    | Inherit from List with object generic type                                                             |
+| Case      | Case      | Case.Default    | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
+| Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
 
 **Conditions Class**
 
