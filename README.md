@@ -1,19 +1,35 @@
 # SearchQuery
 
-SearchQuery is a library that extends LINQ search over a database using Entity Framework.
-SearchQuery isn't tied to any specific database or storage engine and is instead backed by your existing code and data. Search can be done in two interfaces IQueryable, IEnumerable.
+SearchQuery is a library that extends LINQ search over a database using Entity Framework. It is not tied to any specific database or storage engine and is instead backed by your existing code and data. Search can be done in two interfaces: `IQueryable` and `IEnumerable`.
 
 > The main task is to make the request between Frontend - Backend more flexible and easier to search data.
 
-**Info**
-Minimal version is .NET 6.0
 
-> npm install jsearchquery
+## Installation
 
-> dotnet add package SearchQuery
+### .NET
 
-**Warning**
-Important to follow valid json format and type for request condition field type.
+To install the SearchQuery package, run the following command:
+
+```sh
+dotnet add package SearchQuery
+```
+
+### JavaScript/TypeScript
+
+To install the SearchQuery package, run the following command:
+
+```sh
+npm install jsearchquery
+```
+
+## Requirements
+
+- Minimal version: .NET 6.0
+
+## Important Notes
+
+- Ensure to follow valid JSON format and type for request condition field type.
 
 ## Types
 
@@ -29,7 +45,7 @@ A SearchQuery object type at some point those fields have to resolve to some con
 
 ## Examples
 
-JavaScript/TypeScript
+### JavaScript/TypeScript
 
 ```ts
 const search = new SearchQuery({
@@ -67,7 +83,7 @@ const search = new SearchQuery({
 });
 ```
 
-CSharp
+### C#
 
 ```csharp
 var searchQuery = new Search
@@ -125,13 +141,14 @@ using (var db = new Database()) {
 }
 ```
 
-# API
 
-## Namespace: `SearchQuery`
+## API
 
-### Class: `Extensions`
+### Namespace: `SearchQuery`
 
-#### Search Methods
+#### Class: `Extensions`
+
+##### Search Methods
 
 **Search for IEnumerable**
 
@@ -159,7 +176,7 @@ public static IQueryable<T> Search<T>(this IQueryable<T> set, Search query, int 
 - **Parameters**: Same as above.
 - **Returns**: Filtered `IQueryable`.
 
-#### Type Analysis Methods
+##### Type Analysis Methods
 
 **`InType`**
 
@@ -212,83 +229,45 @@ public static bool IsString(this Type? valueType, bool isColletion = false);
 
 - **Description**: Determines if the type represents a specific data type or a collection.
 
----
+### Search Class
 
-## Namespace: `SearchQuery.NewtonsoftJson`
+_Inheritance_ Query Class
 
-### Class: `Extensions`
+| Property   | Type       | Default          | Description                                     |
+| ---------- | ---------- | ---------------- | ----------------------------------------------- |
+| Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
 
-#### JSON Search Methods
+### Query Class
 
-**Convert JSON to Search Query**
+_Inheritance_ ISearch Interface
 
-```csharp
-public static JSearch ToSearch(this string json);
-```
+| Property   | Type       | Default          | Description                                     |
+| ---------- | ---------- | ---------------- | ----------------------------------------------- |
+| Operator   | Operator   | And              | And, Or                                         |
+| Conditions | Conditions | new Conditions() | Inherit from List with ISearch generic type     |
 
-- **Description**: Converts a JSON string to a `JSearch` object.
+### Condition Class
 
-**Search for IEnumerable**
+_Inheritance_ ISearch Interface
 
-```csharp
-public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query) where T : class;
-public static IEnumerable<T> Search<T>(this IEnumerable<T> set, string query, int pageNumber, int pageSize) where T : class;
-```
+| Property  | Type      | Default         | Description                                                                                            |
+| --------- | --------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| Field     | string    | ""              | Entity property name                                                                                   |
+| Operation | Operation | Operation.Equal | Action operation                                                                                       |
+| Values    | Values    | new Values()    | Inherit from List with object generic type                                                             |
+| Incase    | Case      | Case.Default    | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
+| Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
 
-- **Description**: Filters an `IEnumerable` collection using a JSON query string.
+### Conditions Class
 
-**Search for IQueryable**
+_Inheritance_ Base is generic List<ISearch>
 
-```csharp
-public static IQueryable<T> Search<T>(this IQueryable<T> set, string query) where T : class;
-public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int pageNumber, int pageSize) where T : class;
-```
 
-- **Description**: Filters an `IQueryable` collection using a JSON query string.
+### Namespace: `SearchQuery.NewtonsoftJson`, `SearchQuery.SystemTextJson`
 
----
+#### Class: `Extensions`
 
-### Class: `JSearch`
-
-#### Attributes
-
-- **JsonConverter**
-  ```csharp
-  [Newtonsoft.Json.JsonConverter(typeof(SearchConverter))]
-  ```
-  - **Description**: Indicates that the `JSearch` class uses a custom JSON converter for serialization and deserialization.
-
-#### Methods
-
-**`ToJson`**
-
-   ```csharp
-   public string ToJson();
-   ```
-
-   - **Description**: Serializes the `JSearch` object into a JSON string using Newtonsoft.Json.
-
-**`FromJson`**
-   ```csharp
-   public static JSearch FromJson(string json);
-   ```
-   - **Description**: Deserializes a JSON string into a `JSearch` object.
-
-#### Constructor
-
-- **`JSearch()`**
-  ```csharp
-  public JSearch() : base()
-  ```
-  - **Description**: Initializes a new instance of the `JSearch` class.
-
----
-
-## Namespace: `SearchQuery.SystemTextJson`
-
-### Class: `Extensions`
-
-#### JSON Search Methods
+##### JSON Search Methods
 
 **Convert JSON to Search Query**
 
@@ -316,51 +295,6 @@ public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int 
 
 - **Description**: Filters an `IQueryable` collection using a JSON query string.
 
----
-
-## Enums and Supporting Classes
-
-**Enum: `Types`**
-
-```csharp
-public enum Types
-{
-    String,
-    Number,
-    Boolean,
-    Date,
-    Null
-}
-```
-
-**Class: `JSearch`**
-
-- **Description**: Represents a JSON-based search query object.
-- **Methods**:
-  - `public static JSearch FromJson(string json);`
-
-## Namespace: `SearchQuery`
-
-### Class: `Search`
-
-#### Properties
-
-- **`Format`**
-  ```csharp
-  public Format Format { get; set; }
-  ```
-  - **Description**: Specifies the format for interpreting date-time values in search queries.
-  - **Default Value**: `Format.ISODateTime`
-
-#### Constructor
-
-- **`Search()`**
-  ```csharp
-  public Search() : base()
-  ```
-  - **Description**: Initializes a new instance of the `Search` class with default settings.
-
----
 
 ### Class: `JSearch`
 
@@ -396,33 +330,11 @@ public enum Types
   ```
   - **Description**: Initializes a new instance of the `JSearch` class.
 
-**Query Class**
 
-_Inheritance_ ISearch Interface
 
-| Property   | Type       | Default          | Description                                     |
-| ---------- | ---------- | ---------------- | ----------------------------------------------- |
-| Operator   | Operator   | And              | And, Or                                         |
-| Conditions | Conditions | new Conditions() | Inherit from List with ISearch generic type     |
-| Format     | Format     | ISODateTime      | ISO Formats, DateOnly Formats, TimeOnly Formats |
 
-**Condition Class**
 
-_Inheritance_ ISearch Interface
-
-| Property  | Type      | Default         | Description                                                                                            |
-| --------- | --------- | --------------- | ------------------------------------------------------------------------------------------------------ |
-| Field     | string    | ""              | Entity property name                                                                                   |
-| Operation | Operation | Operation.Equal | Action operation                                                                                       |
-| Values    | Values    | new Values()    | Inherit from List with object generic type                                                             |
-| Incase    | Case      | Case.Default    | Transform string for Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith operation |
-| Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
-
-**Conditions Class**
-
-_Inheritance_ Base is generic list
-
-**Operation Enum**
+### Operation Enum
 
 | Key                | Value | String  | Date      | Number    | Boolean   | Null    |
 | ------------------ | ----- | ------- | --------- | --------- | --------- | ------- |
@@ -441,7 +353,7 @@ _Inheritance_ Base is generic list
 | Between            | 12    | Compare | Compare   | By Type   | Compare   | Ignore  |
 | NotBetween         | 13    | Compare | Compare   | By Type   | Compare   | Ignore  |
 
-**Case Enum**
+### Case Enum
 
 | Key     | Value |
 | ------- | ----- |
@@ -449,14 +361,14 @@ _Inheritance_ Base is generic list
 | Lower   | 1     |
 | Upper   | 2     |
 
-**Operator Enum**
+### Operator Enum
 
 | Key | Value |
 | --- | ----- |
 | And | 0     |
 | Or  | 1     |
 
-**Types Enum**
+### Types Enum
 
 | Key     | Value |
 | ------- | ----- |
@@ -466,7 +378,7 @@ _Inheritance_ Base is generic list
 | Boolean | 3     |
 | Date    | 4     |
 
-**Format Enum**
+### Format Enum
 
 | Key                            | Value | Format                   |
 | ------------------------------ | ----- | ------------------------ |
@@ -486,3 +398,6 @@ _Inheritance_ Base is generic list
 | TimeSeconds                    | 24    | ss                       |
 | TimeMilliseconds               | 25    | fff                      |
 | TimeFull                       | 26    | HH:mm:ss.fff             |
+
+
+
