@@ -2,6 +2,9 @@
 
 namespace SearchQuery
 {
+    /// <summary>
+    /// Represents a search interface with JSON converters for both Newtonsoft.Json and System.Text.Json.
+    /// </summary>
     [Newtonsoft.Json.JsonConverter(
         typeof(NewtonsoftJson.ConditionsConverter))]
     [System.Text.Json.Serialization.JsonConverter(
@@ -11,14 +14,30 @@ namespace SearchQuery
 
 namespace SearchQuery.NewtonsoftJson
 {
+    /// <summary>
+    /// JSON converter for the Search class using Newtonsoft.Json.
+    /// </summary>
     internal class SearchConverter : Newtonsoft.Json.JsonConverter
     {
+        /// <summary>
+        /// Determines whether this instance can convert the specified object type.
+        /// </summary>
+        /// <param name="objectType">Type of the object.</param>
+        /// <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(Search).IsAssignableFrom(objectType) || 
                 typeof(Query).IsAssignableFrom(objectType);
         }
 
+        /// <summary>
+        /// Reads the JSON representation of the object.
+        /// </summary>
+        /// <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
+        /// <param name="objectType">Type of the object.</param>
+        /// <param name="existingValue">The existing value of object being read.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        /// <returns>The object value.</returns>
         public override object ReadJson(Newtonsoft.Json.JsonReader reader, 
             Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
@@ -41,9 +60,15 @@ namespace SearchQuery.NewtonsoftJson
             return instance;
         }
 
-        public override void WriteJson(Newtonsoft.Json.JsonWriter writer, 
+        /// <summary>
+        /// Writes the JSON representation of the object.
+        /// </summary>
+        /// <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        public override void WriteJson(Newtonsoft.Json.JsonWriter writer,
             object value, Newtonsoft.Json.JsonSerializer serializer)
-        {   
+        {
             Type objectType = value.GetType();
             writer.WriteStartObject();
             foreach (var property in objectType

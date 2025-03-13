@@ -8,7 +8,7 @@ namespace SearchQuery.Builder
         internal static Expression Number(this MemberExpression left, IEnumerable<object> values, Operation operation) {
             switch (operation)
             {
-                case SearchQuery.Operation.StartsWith:
+                case Operation.StartsWith:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -25,7 +25,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.NotStartsWith:
+                case Operation.NotStartsWith:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -42,7 +42,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.Contains:
+                case Operation.Contains:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -59,7 +59,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.NotContains:
+                case Operation.NotContains:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -76,7 +76,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.EndsWith:
+                case Operation.EndsWith:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -93,7 +93,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.NotEndsWith:
+                case Operation.NotEndsWith:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -110,7 +110,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.Equal:
+                case Operation.Equal:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -126,7 +126,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.NotEqual:
+                case Operation.NotEqual:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -142,7 +142,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.GreaterThan:
+                case Operation.GreaterThan:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -158,7 +158,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.GreaterThanOrEqual:
+                case Operation.GreaterThanOrEqual:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -174,7 +174,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.LessThan:
+                case Operation.LessThan:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -190,7 +190,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.LessThanOrEqual:
+                case Operation.LessThanOrEqual:
                 {
                     var operations = values.Select((right) => {
                         if (!right.IsNumber()) {
@@ -206,7 +206,7 @@ namespace SearchQuery.Builder
 
                     return operations.Aggregate(Expression.AndAlso);
                 }
-                case SearchQuery.Operation.Between:
+                case Operation.Between:
                 {
                     var min = values.ElementAt(0);
                     var max = values.ElementAt(1);
@@ -225,7 +225,7 @@ namespace SearchQuery.Builder
                     return (new Expression[] { left.IntoNullable(), min.IntoNullable(), max.IntoNullable()})
                         .AnyEqualNulls(Expression.Constant(false), expression);
                 }
-                case SearchQuery.Operation.NotBetween:
+                case Operation.NotBetween:
                 {
                     var min = values.ElementAt(0);
                     var max = values.ElementAt(1);

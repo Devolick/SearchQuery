@@ -2,9 +2,9 @@
 
 namespace SearchQuery.Builder
 {
-    internal static class BooleanBuilder
+    internal static class EnumBuilder
     {
-        internal static Expression Boolean(this MemberExpression left, IEnumerable<object> values, Operation operation) {
+        internal static Expression Enum(this MemberExpression left, IEnumerable<object> values, Operation operation) {
             switch (operation)
             {
                 case Operation.GreaterThan:
@@ -19,13 +19,13 @@ namespace SearchQuery.Builder
                 case Operation.NotContains:
                 case Operation.EndsWith:
                 case Operation.NotEndsWith:
-                    throw new ArgumentException("Unsupported Boolean operation");
+                    throw new ArgumentException("Unsupported Enum operation");
 
                 case Operation.Equal:
                 {
                     var operations = values.Select((right) => {
-                        if (!right.IsBoolean()) {
-                            throw new ArgumentException("Invalid values type");
+                        if (!right.IsEnum()) {
+                            throw new ArgumentException("Invalid Enum values type");
                         }
 
                         var expression = Expression.Equal(left.IntoNullable(), right.IntoNullable());
@@ -39,8 +39,8 @@ namespace SearchQuery.Builder
                 case Operation.NotEqual:
                 {
                     var operations = values.Select((right) => {
-                        if (!right.IsBoolean()) {
-                            throw new ArgumentException("Invalid values type");
+                        if (!right.IsEnum()) {
+                            throw new ArgumentException("Invalid Enum values type");
                         }
 
                         var expression = Expression.NotEqual(left.IntoNullable(), right.IntoNullable());
@@ -52,7 +52,7 @@ namespace SearchQuery.Builder
                     return operations.Aggregate(Expression.AndAlso);
                 }
 
-                default: throw new ArgumentException("Uknown Boolean operation");
+                default: throw new ArgumentException("Uknown Enum operation");
             }
         }
 

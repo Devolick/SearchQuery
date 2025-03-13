@@ -4,7 +4,6 @@ SearchQuery is a library that extends LINQ search over a database using Entity F
 
 > The main task is to make the request between Frontend - Backend more flexible and easier to search data.
 
-
 ## Installation
 
 ### .NET
@@ -38,7 +37,7 @@ A SearchQuery object type at some point those fields have to resolve to some con
 | SearchQuery JS/TS | SearchQuery .NET | .NET                                                                             |
 | ----------------- | ---------------- | -------------------------------------------------------------------------------- |
 | string            | string           | string                                                                           |
-| Date              | string           | DateTime                                                                         |
+| Date, string      | string           | DateTime, string                                                                 |
 | number            | number           | char, byte, sbyte, short, ushort, int, uint, long, ulong, float, double, decimal |
 | boolean           | boolean          | boolean                                                                          |
 | null/undefined    | null             | null                                                                             |
@@ -141,7 +140,6 @@ using (var db = new Database()) {
 }
 ```
 
-
 ## API
 
 ### Namespace: `SearchQuery`
@@ -233,18 +231,18 @@ public static bool IsString(this Type? valueType, bool isColletion = false);
 
 _Inheritance_ Query Class
 
-| Property   | Type       | Default          | Description                                     |
-| ---------- | ---------- | ---------------- | ----------------------------------------------- |
-| Format    | Format    | ISODateTime     | ISO Formats, DateOnly Formats, TimeOnly Formats                                                        |
+| Property | Type   | Default     | Description                                     |
+| -------- | ------ | ----------- | ----------------------------------------------- |
+| Format   | Format | ISODateTime | ISO Formats, DateOnly Formats, TimeOnly Formats |
 
 ### Query Class
 
 _Inheritance_ ISearch Interface
 
-| Property   | Type       | Default          | Description                                     |
-| ---------- | ---------- | ---------------- | ----------------------------------------------- |
-| Operator   | Operator   | And              | And, Or                                         |
-| Conditions | Conditions | new Conditions() | Inherit from List with ISearch generic type     |
+| Property   | Type       | Default          | Description                                 |
+| ---------- | ---------- | ---------------- | ------------------------------------------- |
+| Operator   | Operator   | And              | And, Or                                     |
+| Conditions | Conditions | new Conditions() | Inherit from List with ISearch generic type |
 
 ### Condition Class
 
@@ -261,7 +259,6 @@ _Inheritance_ ISearch Interface
 ### Conditions Class
 
 _Inheritance_ Base is generic List<ISearch>
-
 
 ### Namespace: `SearchQuery.NewtonsoftJson`, `SearchQuery.SystemTextJson`
 
@@ -294,7 +291,6 @@ public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int 
 ```
 
 - **Description**: Filters an `IQueryable` collection using a JSON query string.
-
 
 ### Class: `JSearch`
 
@@ -329,10 +325,6 @@ public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int 
   public JSearch() : base()
   ```
   - **Description**: Initializes a new instance of the `JSearch` class.
-
-
-
-
 
 ### Operation Enum
 
@@ -398,6 +390,3 @@ public static IQueryable<T> Search<T>(this IQueryable<T> set, string query, int 
 | TimeSeconds                    | 24    | ss                       |
 | TimeMilliseconds               | 25    | fff                      |
 | TimeFull                       | 26    | HH:mm:ss.fff             |
-
-
-

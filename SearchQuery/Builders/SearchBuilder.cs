@@ -103,6 +103,8 @@ namespace SearchQuery.Builder
                 return left.Boolean(values, operation);
             } else if (left.IsDate()) {
                 return left.Date(values, operation, format ?? search.Format);
+            } else if (left.IsEnum()) {
+                return left.Enum(values, operation);
             }
 
             throw new ArgumentException("Uknown Operation argument type");
