@@ -1,6 +1,6 @@
 {
   "name": "jsearchquery",
-  "version": "1.0.0-4",
+  "version": "1.0.1",
   "description": "SearchQuery is a library that extends LINQ search over a database using Entity Framework.",
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.es.js",
@@ -27,7 +27,16 @@
     "database",
     "collection",
     "Entity Framework",
-    "LINQ"
+    "LINQ",
+    "pagination",
+    "JSON",
+    "type-safety",
+    "filtering",
+    "query-builder",
+    "typescript",
+    "javascript",
+    "IQueryable",
+    "IEnumerable"
   ],
   "author": "Dzmitry Dym",
   "license": "MIT",
