@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>SearchQuery</PackageId>
-    <Version>1.0.1</Version> 
+    <Version>1.0.1.1</Version> 
     <Authors>Dzmitry Dym</Authors>
     <Description>SearchQuery is a library that extends LINQ search over a database using Entity Framework.</Description>
     <PackageTags>search;query;data;database;collection;Entity Framework;LINQ;pagination;JSON;type-safety;filtering;query-builder;IQueryable;IEnumerable</PackageTags>
